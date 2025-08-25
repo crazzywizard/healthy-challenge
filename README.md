@@ -22,7 +22,7 @@ A progressive web app for tracking your 75 Hard weight loss challenge progress. 
 
 ## 📋 Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - Yarn or npm
 - Privy account (for authentication)
 
@@ -106,13 +106,17 @@ src/
 ## 🎨 Customization
 
 ### Theme Colors
+
 Customize the app's appearance in `src/config/privy.ts`:
+
 - Primary color: `#10b981` (green)
 - Theme: Light/Dark
 - Accent colors and branding
 
 ### Authentication Methods
+
 Configure supported login methods in `src/config/privy.ts`:
+
 - Email authentication
 - Wallet connections (MetaMask, WalletConnect, etc.)
 - Social logins (Google, Twitter, Discord)
@@ -127,11 +131,13 @@ Configure supported login methods in `src/config/privy.ts`:
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
+
 1. Connect your GitHub repository
 2. Set environment variables for Privy
 3. Deploy automatically on push
 
 ### Other Platforms
+
 1. Build the project: `yarn build`
 2. Set environment variables for Privy
 3. Deploy the `out` directory

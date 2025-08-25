@@ -10,7 +10,11 @@ import { PWAInstallPrompt } from '@/components/pwa-install-prompt';
 import { UserProfileForm } from '@/components/user-profile';
 
 export default function HomePage() {
-  const { isLoading: challengeLoading, userProfile, updateUserProfile } = useChallenge();
+  const {
+    isLoading: challengeLoading,
+    userProfile,
+    updateUserProfile,
+  } = useChallenge();
 
   if (challengeLoading) {
     return <LoadingSpinner />;
@@ -21,7 +25,10 @@ export default function HomePage() {
       <Header />
       <main className="container mx-auto px-4 py-6 max-w-md">
         <div className="space-y-6">
-          <UserProfileForm userProfile={userProfile} onSave={updateUserProfile} />
+          <UserProfileForm
+            userProfile={userProfile}
+            onSave={updateUserProfile}
+          />
           <ChallengeStats />
           <DailyGoals />
           <ProgressCalendar />

@@ -6,7 +6,7 @@ import {
   loadChallengeData,
   saveChallengeData,
   initializeChallenge,
-  updateTodayProgress as updateProgress
+  updateTodayProgress as updateProgress,
 } from '@/utils/challenge-utils';
 
 interface ChallengeContextType {
@@ -19,10 +19,14 @@ interface ChallengeContextType {
   isLoading: boolean;
 }
 
-const ChallengeContext = createContext<ChallengeContextType | undefined>(undefined);
+const ChallengeContext = createContext<ChallengeContextType | undefined>(
+  undefined
+);
 
 export function ChallengeProvider({ children }: { children: React.ReactNode }) {
-  const [challengeData, setChallengeData] = useState<ChallengeData | null>(null);
+  const [challengeData, setChallengeData] = useState<ChallengeData | null>(
+    null
+  );
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -41,7 +45,9 @@ export function ChallengeProvider({ children }: { children: React.ReactNode }) {
     loadData();
   }, []);
 
-  const updateTodayProgress = (updates: Partial<Omit<DailyProgress, 'date'>>) => {
+  const updateTodayProgress = (
+    updates: Partial<Omit<DailyProgress, 'date'>>
+  ) => {
     if (!challengeData) return;
 
     const updatedData = updateProgress(challengeData, updates);
@@ -54,7 +60,7 @@ export function ChallengeProvider({ children }: { children: React.ReactNode }) {
 
     const updatedData = {
       ...challengeData,
-      userProfile: profile
+      userProfile: profile,
     };
     setChallengeData(updatedData);
     saveChallengeData(updatedData);
@@ -67,7 +73,9 @@ export function ChallengeProvider({ children }: { children: React.ReactNode }) {
   };
 
   const todayProgress = challengeData
-    ? challengeData.progress.find((p) => p.date === new Date().toISOString().split('T')[0]) || null
+    ? challengeData.progress.find(
+        p => p.date === new Date().toISOString().split('T')[0]
+      ) || null
     : null;
 
   const userProfile = challengeData?.userProfile || null;
@@ -81,7 +89,7 @@ export function ChallengeProvider({ children }: { children: React.ReactNode }) {
         updateTodayProgress,
         updateUserProfile,
         resetChallenge,
-        isLoading
+        isLoading,
       }}
     >
       {children}

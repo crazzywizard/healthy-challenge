@@ -16,34 +16,36 @@ export function ChallengeStats() {
       icon: Calendar,
       label: 'Day',
       value: `${stats.currentDay}/${stats.totalDays}`,
-      color: 'text-blue-600'
+      color: 'text-blue-600',
     },
     {
       icon: Flame,
       label: 'Streak',
       value: stats.streak,
-      color: 'text-orange-600'
+      color: 'text-orange-600',
     },
     {
       icon: Target,
       label: 'Completed',
       value: stats.completedDays,
-      color: 'text-green-600'
+      color: 'text-green-600',
     },
     {
       icon: TrendingUp,
       label: 'Success Rate',
       value: `${stats.successRate}%`,
-      color: 'text-purple-600'
-    }
+      color: 'text-purple-600',
+    },
   ];
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
-      <h2 className="text-lg font-semibold text-gray-900 mb-4">Challenge Progress</h2>
+      <h2 className="text-lg font-semibold text-gray-900 mb-4">
+        Challenge Progress
+      </h2>
 
       <div className="grid grid-cols-2 gap-4">
-        {statItems.map((item) => (
+        {statItems.map(item => (
           <div key={item.label} className="text-center">
             <div className={cn('flex justify-center mb-2')}>
               <item.icon className={cn('w-6 h-6', item.color)} />

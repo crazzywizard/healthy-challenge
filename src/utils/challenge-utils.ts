@@ -3,7 +3,6 @@ import {
   DailyProgress,
   ChallengeStats,
   CHALLENGE_DAYS,
-  UserProfile
 } from '@/types/challenge';
 import { format, differenceInDays, isToday, isYesterday } from 'date-fns';
 
@@ -14,7 +13,7 @@ export function initializeChallenge(): ChallengeData {
   return {
     userProfile: {
       name: '',
-      startingWeight: 0
+      startingWeight: 0,
     },
     startDate: format(today, 'yyyy-MM-dd'),
     progress: [],
@@ -23,8 +22,8 @@ export function initializeChallenge(): ChallengeData {
       totalDays: CHALLENGE_DAYS,
       streak: 0,
       completedDays: 0,
-      successRate: 0
-    }
+      successRate: 0,
+    },
   };
 }
 
@@ -51,7 +50,7 @@ export function saveChallengeData(data: ChallengeData): void {
 
 export function getTodayProgress(data: ChallengeData): DailyProgress | null {
   const today = format(new Date(), 'yyyy-MM-dd');
-  return data.progress.find((p) => p.date === today) || null;
+  return data.progress.find(p => p.date === today) || null;
 }
 
 export function updateTodayProgress(
@@ -59,14 +58,14 @@ export function updateTodayProgress(
   updates: Partial<Omit<DailyProgress, 'date'>>
 ): ChallengeData {
   const today = format(new Date(), 'yyyy-MM-dd');
-  const existingIndex = data.progress.findIndex((p) => p.date === today);
+  const existingIndex = data.progress.findIndex(p => p.date === today);
 
   const todayProgress: DailyProgress = {
     date: today,
     noEatingOut: updates.noEatingOut ?? false,
     stepsOrCalories: updates.stepsOrCalories ?? false,
     lowSugar: updates.lowSugar ?? false,
-    notes: updates.notes
+    notes: updates.notes,
   };
 
   if (existingIndex >= 0) {
@@ -78,17 +77,23 @@ export function updateTodayProgress(
   return {
     ...data,
     progress: [...data.progress],
-    stats: calculateStats(data.progress, data.startDate)
+    stats: calculateStats(data.progress, data.startDate),
   };
 }
 
-export function calculateStats(progress: DailyProgress[], startDate: string): ChallengeStats {
+export function calculateStats(
+  progress: DailyProgress[],
+  startDate: string
+): ChallengeStats {
   const start = new Date(startDate);
   const today = new Date();
-  const currentDay = Math.min(differenceInDays(today, start) + 1, CHALLENGE_DAYS);
+  const currentDay = Math.min(
+    differenceInDays(today, start) + 1,
+    CHALLENGE_DAYS
+  );
 
   const completedDays = progress.filter(
-    (p) => p.noEatingOut && p.stepsOrCalories && p.lowSugar
+    p => p.noEatingOut && p.stepsOrCalories && p.lowSugar
   ).length;
 
   // Calculate streak
@@ -105,14 +110,15 @@ export function calculateStats(progress: DailyProgress[], startDate: string): Ch
     }
   }
 
-  const successRate = progress.length > 0 ? (completedDays / progress.length) * 100 : 0;
+  const successRate =
+    progress.length > 0 ? (completedDays / progress.length) * 100 : 0;
 
   return {
     currentDay,
     totalDays: CHALLENGE_DAYS,
     streak,
     completedDays,
-    successRate: Math.round(successRate)
+    successRate: Math.round(successRate),
   };
 }
 
@@ -133,7 +139,12 @@ export function getProgressPercentage(progress: DailyProgress[]): number {
 
   const totalGoals = progress.length * 3; // 3 goals per day
   const completedGoals = progress.reduce((sum, day) => {
-    return sum + (day.noEatingOut ? 1 : 0) + (day.stepsOrCalories ? 1 : 0) + (day.lowSugar ? 1 : 0);
+    return (
+      sum +
+      (day.noEatingOut ? 1 : 0) +
+      (day.stepsOrCalories ? 1 : 0) +
+      (day.lowSugar ? 1 : 0)
+    );
   }, 0);
 
   return Math.round((completedGoals / totalGoals) * 100);

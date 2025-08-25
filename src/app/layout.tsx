@@ -10,18 +10,23 @@ export const metadata: Metadata = {
   description: 'Track your 75 Hard weight loss challenge progress',
   manifest: '/manifest.json',
   themeColor: '#10b981',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
+  viewport:
+    'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no',
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: '75 Hard'
+    title: '75 Hard',
   },
   formatDetection: {
-    telephone: false
-  }
+    telephone: false,
+  },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <head>

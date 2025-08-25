@@ -11,14 +11,17 @@ interface UserProfileFormProps {
 export function UserProfileForm({ userProfile, onSave }: UserProfileFormProps) {
   const [formData, setFormData] = useState<UserProfile>({
     name: userProfile?.name || '',
-    startingWeight: userProfile?.startingWeight || 0
+    startingWeight: userProfile?.startingWeight || 0,
   });
   const [isEditing, setIsEditing] = useState(!userProfile);
 
-  const handleInputChange = (field: keyof UserProfile, value: string | number) => {
-    setFormData((prev) => ({
+  const handleInputChange = (
+    field: keyof UserProfile,
+    value: string | number
+  ) => {
+    setFormData(prev => ({
       ...prev,
-      [field]: field === 'name' ? value : Number(value)
+      [field]: field === 'name' ? value : Number(value),
     }));
   };
 
@@ -53,7 +56,9 @@ export function UserProfileForm({ userProfile, onSave }: UserProfileFormProps) {
           </div>
           <div>
             <span className="text-gray-600 text-sm">Starting Weight:</span>
-            <p className="font-medium text-gray-800">{userProfile.startingWeight} lbs</p>
+            <p className="font-medium text-gray-800">
+              {userProfile.startingWeight} lbs
+            </p>
           </div>
         </div>
       </div>
@@ -67,14 +72,17 @@ export function UserProfileForm({ userProfile, onSave }: UserProfileFormProps) {
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Name *
           </label>
           <input
             type="text"
             id="name"
             value={formData.name}
-            onChange={(e) => handleInputChange('name', e.target.value)}
+            onChange={e => handleInputChange('name', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="Enter your name"
             required
@@ -82,14 +90,17 @@ export function UserProfileForm({ userProfile, onSave }: UserProfileFormProps) {
         </div>
 
         <div>
-          <label htmlFor="startingWeight" className="block text-sm font-medium text-gray-700 mb-1">
+          <label
+            htmlFor="startingWeight"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Starting Weight (lbs) *
           </label>
           <input
             type="number"
             id="startingWeight"
             value={formData.startingWeight || ''}
-            onChange={(e) => handleInputChange('startingWeight', e.target.value)}
+            onChange={e => handleInputChange('startingWeight', e.target.value)}
             className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             placeholder="0"
             min="0"

@@ -7,7 +7,11 @@ export function Header() {
   const { resetChallenge } = useChallenge();
 
   const handleReset = () => {
-    if (confirm('Are you sure you want to reset your challenge? This will delete all progress.')) {
+    if (
+      confirm(
+        'Are you sure you want to reset your challenge? This will delete all progress.'
+      )
+    ) {
       resetChallenge();
     }
   };

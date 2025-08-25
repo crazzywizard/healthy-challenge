@@ -1,7 +1,13 @@
 'use client';
 
 import { useChallenge } from '@/contexts/challenge-context';
-import { format, subDays, startOfWeek, endOfWeek, eachDayOfInterval } from 'date-fns';
+import {
+  format,
+  subDays,
+  startOfWeek,
+  endOfWeek,
+  eachDayOfInterval,
+} from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/utils/cn';
@@ -26,16 +32,16 @@ export function ProgressCalendar() {
 
   const getDayProgress = (date: Date) => {
     const dateStr = format(date, 'yyyy-MM-dd');
-    return challengeData.progress.find((p) => p.date === dateStr);
+    return challengeData.progress.find(p => p.date === dateStr);
   };
 
-  const getProgressColor = (progress: any) => {
+  const getProgressColor = (progress: DailyProgress | undefined) => {
     if (!progress) return 'bg-gray-100';
 
     const completedGoals = [
       progress.noEatingOut,
       progress.stepsOrCalories,
-      progress.lowSugar
+      progress.lowSugar,
     ].filter(Boolean).length;
 
     if (completedGoals === 3) return 'bg-green-500';
@@ -51,7 +57,9 @@ export function ProgressCalendar() {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">Progress Calendar</h2>
+        <h2 className="text-lg font-semibold text-gray-900">
+          Progress Calendar
+        </h2>
         <div className="flex items-center gap-2">
           <button
             onClick={goToPreviousWeek}
@@ -73,14 +81,17 @@ export function ProgressCalendar() {
 
       <div className="grid grid-cols-7 gap-2">
         {/* Day headers */}
-        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-          <div key={day} className="text-center text-xs font-medium text-gray-500 py-2">
+        {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map(day => (
+          <div
+            key={day}
+            className="text-center text-xs font-medium text-gray-500 py-2"
+          >
             {day}
           </div>
         ))}
 
         {/* Calendar days */}
-        {weekDays.map((date) => {
+        {weekDays.map(date => {
           const progress = getDayProgress(date);
           const isCurrentDay = isToday(date);
 
@@ -95,7 +106,10 @@ export function ProgressCalendar() {
             >
               <div className="absolute inset-0 flex items-center justify-center">
                 <span
-                  className={cn('text-xs font-medium', progress ? 'text-white' : 'text-gray-600')}
+                  className={cn(
+                    'text-xs font-medium',
+                    progress ? 'text-white' : 'text-gray-600'
+                  )}
                 >
                   {format(date, 'd')}
                 </span>

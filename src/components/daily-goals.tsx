@@ -44,20 +44,26 @@ export function DailyGoals() {
   };
 
   const completedGoals = todayProgress
-    ? [todayProgress.noEatingOut, todayProgress.stepsOrCalories, todayProgress.lowSugar].filter(
-        Boolean
-      ).length
+    ? [
+        todayProgress.noEatingOut,
+        todayProgress.stepsOrCalories,
+        todayProgress.lowSugar,
+      ].filter(Boolean).length
     : 0;
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold text-gray-900">Today's Goals</h2>
-        <div className="text-sm text-gray-600">{completedGoals}/3 completed</div>
+        <h2 className="text-lg font-semibold text-gray-900">
+          Today&apos;s Goals
+        </h2>
+        <div className="text-sm text-gray-600">
+          {completedGoals}/3 completed
+        </div>
       </div>
 
       <div className="space-y-3">
-        {DAILY_GOALS.map((goal) => {
+        {DAILY_GOALS.map(goal => {
           const isCompleted = getGoalStatus(goal.id);
 
           return (
@@ -74,10 +80,20 @@ export function DailyGoals() {
               <div className="text-2xl">{goal.icon}</div>
 
               <div className="flex-1">
-                <h3 className={cn('font-medium', isCompleted ? 'text-green-800' : 'text-gray-900')}>
+                <h3
+                  className={cn(
+                    'font-medium',
+                    isCompleted ? 'text-green-800' : 'text-gray-900'
+                  )}
+                >
                   {goal.title}
                 </h3>
-                <p className={cn('text-sm', isCompleted ? 'text-green-600' : 'text-gray-600')}>
+                <p
+                  className={cn(
+                    'text-sm',
+                    isCompleted ? 'text-green-600' : 'text-gray-600'
+                  )}
+                >
                   {goal.description}
                 </p>
               </div>

@@ -9,7 +9,8 @@ interface BeforeInstallPromptEvent extends Event {
 }
 
 export function PWAInstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
+  const [deferredPrompt, setDeferredPrompt] =
+    useState<BeforeInstallPromptEvent | null>(null);
   const [showPrompt, setShowPrompt] = useState(false);
 
   useEffect(() => {
@@ -22,7 +23,10 @@ export function PWAInstallPrompt() {
     window.addEventListener('beforeinstallprompt', handler as EventListener);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handler as EventListener);
+      window.removeEventListener(
+        'beforeinstallprompt',
+        handler as EventListener
+      );
     };
   }, []);
 
@@ -55,7 +59,9 @@ export function PWAInstallPrompt() {
         </div>
 
         <div className="flex-1">
-          <h3 className="font-medium text-gray-900">Install 75 Hard Challenge</h3>
+          <h3 className="font-medium text-gray-900">
+            Install 75 Hard Challenge
+          </h3>
           <p className="text-sm text-gray-600 mt-1">
             Add this app to your home screen for quick access and offline use.
           </p>
