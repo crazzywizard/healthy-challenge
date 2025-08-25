@@ -8,27 +8,30 @@ const urlsToCache = [
   '/icon-512x512.png',
 ];
 
-self.addEventListener('install', (event: ExtendableEvent) => {
-  event.waitUntil(
+self.addEventListener('install', (event: Event) => {
+  const installEvent = event as ExtendableEvent;
+  installEvent.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-self.addEventListener('fetch', (event: FetchEvent) => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
+self.addEventListener('fetch', (event: Event) => {
+  const fetchEvent = event as FetchEvent;
+  fetchEvent.respondWith(
+    caches.match(fetchEvent.request).then(response => {
       if (response) {
         return response;
       }
-      return fetch(event.request);
+      return fetch(fetchEvent.request);
     })
   );
 });
 
-self.addEventListener('activate', (event: ExtendableEvent) => {
-  event.waitUntil(
+self.addEventListener('activate', (event: Event) => {
+  const activateEvent = event as ExtendableEvent;
+  activateEvent.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
