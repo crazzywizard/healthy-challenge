@@ -2,7 +2,6 @@ import type { NextConfig } from 'next';
 
 const baseConfig: NextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
 };
 
 // In development, use base config

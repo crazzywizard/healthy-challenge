@@ -1,6 +1,7 @@
 'use client';
 
 import { useChallenge } from '@/contexts/challenge-context';
+import { DailyProgress } from '@/types/challenge';
 import {
   format,
   subDays,
